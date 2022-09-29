@@ -8,6 +8,7 @@ import Header from '../components/HomeScreenUI/Header';
 import HomeDailyReminderCard from '../components/HomeScreenUI/HomeDailyReminderCard';
 import ModalCircularDailyReminder from '../components/HomeScreenUI/ModalCircularDailyReminder';
 import ChosenDailyReminder from '../components/HomeScreenUI/ChosenDailyReminder';
+import EventStatistics from '../components/HomeScreenUI/EventStatistics';
 
 
 export default function Home() {
@@ -97,6 +98,7 @@ export default function Home() {
             </Modal>
             <ChosenDailyReminder/>
         </View>
+        <EventStatistics/>
     </View>
   )
 }
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.green,
   },
   emptyReminderView: {
-    height: screenHeight < 700? 100 : 150,
+    height: screenHeight < 700? 80 : 120,
     justifyContent: 'center',
     alignItems: 'center',
   },  
