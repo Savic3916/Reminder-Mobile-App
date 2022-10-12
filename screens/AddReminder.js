@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReminder } from '../store/redux/reminderSlice';
 import { getFormattedDate } from '../util/FormatDate'
+import { storeReminder } from '../util/http';
 import Colors from '../constants/Colors';
 import MyCalendar from '../components/AddReminderUI/MyCalendar';
 import Inputs from '../components/AddReminderUI/Inputs';
@@ -129,6 +130,9 @@ export default function AddReminder({ navigation }) {
 
       return;
     };
+      // if it passed all the stages, add the users input to the backend
+      storeReminder(reminderData);  
+
       dispatch(addReminder([...reminderState, reminderData]))
       navigation.navigate('MyReminders');
       
