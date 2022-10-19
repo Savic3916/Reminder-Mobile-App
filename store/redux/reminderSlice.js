@@ -31,8 +31,11 @@ export const reminderSlice = createSlice({
         deleteDailyReminder: (state, action) => {
             state.chosenDailyReminder = action.payload;
         },
+        setReminder: (state, action) => {
+            state.reminders = action.payload;
+        }
     }
 });
 
-export const { addReminder, deleteReminder, addDailyReminder, deleteDailyReminder } = reminderSlice.actions;
+export const { addReminder, deleteReminder, addDailyReminder, deleteDailyReminder, setReminder } = reminderSlice.actions;
 export default reminderSlice.reducer;

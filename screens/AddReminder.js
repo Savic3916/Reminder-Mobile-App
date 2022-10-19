@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, KeyboardAvoidingView, Dimensions } from 'react-
 import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addReminder } from '../store/redux/reminderSlice';
+import { addReminder, setReminder } from '../store/redux/reminderSlice';
 import { getFormattedDate } from '../util/FormatDate'
 import { storeReminder } from '../util/http';
 import Colors from '../constants/Colors';
@@ -16,8 +16,9 @@ export default function AddReminder({ navigation }) {
   
   // APP WIDE STATE
   const reminderState = useSelector((state) => state.reminder.reminders);
+  console.log(reminderState)
   // create a dispatcher
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   // value for time
   const [time, setTime] = useState({value: '', isValid: true});
@@ -60,10 +61,9 @@ export default function AddReminder({ navigation }) {
                   {label: 'Green', value: 'green'},
                 ];
 
-  const buttonPressHandler = () => {
+  const buttonPressHandler = async() => {
   
     const reminderData = {
-      id: Math.random().toString().concat(details.value),
       time: time.value.toString().slice(16, 21),
       date: selected.value,
       details: details.value,
@@ -131,9 +131,9 @@ export default function AddReminder({ navigation }) {
       return;
     };
       // if it passed all the stages, add the users input to the backend
-      storeReminder(reminderData);  
+      const id = await storeReminder(reminderData);  
 
-      dispatch(addReminder([...reminderState, reminderData]))
+      dispatch(addReminder([...reminderState, {id: id, ...reminderData}]));
       navigation.navigate('MyReminders');
       
       // after navigating, clear all the inputs previously inserted

@@ -1,19 +1,31 @@
 import { FlatList, StyleSheet, Text, View, Dimensions, Image, Pressable, Modal } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { getFormattedDate } from '../util/FormatDate';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Colors from '../constants/Colors';
 import Header from '../components/HomeScreenUI/Header';
 import HomeDailyReminderCard from '../components/HomeScreenUI/HomeDailyReminderCard';
 import ModalCircularDailyReminder from '../components/HomeScreenUI/ModalCircularDailyReminder';
 import ChosenDailyReminder from '../components/HomeScreenUI/ChosenDailyReminder';
 import EventStatistics from '../components/HomeScreenUI/EventStatistics';
+import { setReminder } from '../store/redux/reminderSlice';
+import { getReminder } from '../util/http';
 
 
 export default function Home() {
   // APP WIDE STATE
   const reminderState = useSelector((state) => state.reminder.reminders);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchExpenses(){
+      const reminder = await getReminder();
+      dispatch(setReminder(reminder));
+    };
+    fetchExpenses();
+  }, []);
+
 
   // useState
   const [modal, setModal] = useState(false)
