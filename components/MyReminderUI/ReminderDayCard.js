@@ -3,6 +3,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteReminder } from '../../store/redux/reminderSlice';
+import { deleteServerReminder } from '../../util/http';
 import Colors from '../../constants/Colors';
 
 export default function ReminderDayCard({ id, details, time }) {
@@ -28,6 +29,7 @@ export default function ReminderDayCard({ id, details, time }) {
   // on press the delete button
   const pressHandler = (id) => {
     dispatch(deleteReminder(reminderState.filter((reminder) => reminder.id !== id))) // delete when pressed
+    deleteServerReminder(id);
   };
 
   return (

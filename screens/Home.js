@@ -16,6 +16,7 @@ import { getReminder } from '../util/http';
 export default function Home() {
   // APP WIDE STATE
   const reminderState = useSelector((state) => state.reminder.reminders);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

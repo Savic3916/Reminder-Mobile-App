@@ -16,7 +16,6 @@ export default function AddReminder({ navigation }) {
   
   // APP WIDE STATE
   const reminderState = useSelector((state) => state.reminder.reminders);
-  console.log(reminderState)
   // create a dispatcher
    const dispatch = useDispatch();
 
